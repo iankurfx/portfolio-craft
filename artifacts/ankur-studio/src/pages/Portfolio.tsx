@@ -38,13 +38,13 @@ export default function Portfolio() {
     },
   });
 
-  const tape = "DESIGNS BY ANKUR  ·  DESIGNS BY ANKUR  ·  DESIGNS BY ANKUR  ·  DESIGNS BY ANKUR  ·  DESIGNS BY ANKUR  ·  ";
+  const tape = "  DESIGNS BY ANKUR  ·  ";
 
   return (
     <div
       data-theme={theme}
-      className="min-h-screen bg-background text-foreground overflow-x-hidden"
-      style={{ fontFamily: "'Inter', sans-serif" }}
+      className="min-h-screen bg-background text-foreground"
+      style={{ fontFamily: "'Inter', sans-serif", overflowX: "clip" }}
     >
 
       {/* ── NAV ─────────────────────────────────────────────── */}
@@ -76,8 +76,75 @@ export default function Portfolio() {
         </div>
       </nav>
 
+      {/* spacer so tape sits below fixed nav */}
+      <div style={{ height: "64px" }} />
+
+      {/* ── TAPE ────────────────────────────────────────────── */}
+      <div
+        style={{
+          width: "110vw",
+          marginLeft: "-5vw",
+          transform: "rotate(-1.5deg)",
+          position: "relative",
+          zIndex: 10,
+        }}
+      >
+        <div
+          style={{
+            height: "50px",
+            background: "#ffd000",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          {/* Stripe layer (behind text) */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundImage:
+                "repeating-linear-gradient(-55deg, transparent, transparent 24px, rgba(0,0,0,0.15) 24px, rgba(0,0,0,0.15) 40px)",
+              zIndex: 1,
+            }}
+          />
+          {/* Text layer (above stripes) */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              display: "flex",
+              alignItems: "center",
+              zIndex: 2,
+              overflow: "hidden",
+            }}
+          >
+            <div
+              className="animate-tape"
+              style={{ display: "flex", alignItems: "center", whiteSpace: "nowrap", width: "200%" }}
+            >
+              {[0, 1].map((n) => (
+                <span
+                  key={n}
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontWeight: 800,
+                    fontSize: "0.72rem",
+                    letterSpacing: "0.32em",
+                    color: "#000000",
+                    whiteSpace: "nowrap",
+                    userSelect: "none",
+                  }}
+                >
+                  {tape.repeat(30)}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* ── HERO ────────────────────────────────────────────── */}
-      <section className="min-h-screen flex flex-col justify-center pt-24 pb-16 px-6 md:px-12 lg:px-20 relative overflow-hidden">
+      <section className="min-h-[calc(100vh-50px)] flex flex-col justify-center pt-16 pb-16 px-6 md:px-12 lg:px-20 relative overflow-hidden">
 
         {/* faint radial glow */}
         <div
@@ -189,50 +256,6 @@ export default function Portfolio() {
           </div>
         </div>
       </section>
-
-      {/* ── TAPE ────────────────────────────────────────────── */}
-      <div className="relative py-1 -rotate-[1.8deg] overflow-hidden my-4">
-        <div
-          className="h-14 flex items-center overflow-hidden"
-          style={{
-            background: "#ffd000",
-            backgroundImage:
-              "repeating-linear-gradient(-45deg, transparent, transparent 18px, rgba(0,0,0,0.85) 18px, rgba(0,0,0,0.85) 34px)",
-          }}
-        >
-          <div
-            className="animate-tape flex items-center whitespace-nowrap"
-            style={{ width: "200%" }}
-          >
-            <span
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontWeight: 700,
-                fontSize: "0.85rem",
-                letterSpacing: "0.22em",
-                color: "#000",
-                whiteSpace: "nowrap",
-                userSelect: "none",
-              }}
-            >
-              {tape.repeat(4)}
-            </span>
-            <span
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontWeight: 700,
-                fontSize: "0.85rem",
-                letterSpacing: "0.22em",
-                color: "#000",
-                whiteSpace: "nowrap",
-                userSelect: "none",
-              }}
-            >
-              {tape.repeat(4)}
-            </span>
-          </div>
-        </div>
-      </div>
 
       {/* ── GALLERY ─────────────────────────────────────────── */}
       <section

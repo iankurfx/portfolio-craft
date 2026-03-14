@@ -128,7 +128,7 @@ body {
 
 @layer utilities {
   .animate-tape {
-    animation: tape-scroll 18s linear infinite;
+    animation: tape-scroll 22s linear infinite;
   }
 
   .animate-fade-up {
