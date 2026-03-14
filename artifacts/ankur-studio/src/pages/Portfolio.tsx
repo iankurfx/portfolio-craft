@@ -1,6 +1,31 @@
-import { useState, useEffect } from "react";
-import { Instagram, Disc, Palette } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Instagram, Disc, Palette, Diamond } from "lucide-react";
 import { getGalleryItems } from "@/lib/data";
+
+function useIntersectionObserver(options = {}) {
+  const [elements, setElements] = useState<Element[]>([]);
+  const [entries, setEntries] = useState<IntersectionObserverEntry[]>([]);
+
+  const observer = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    if (elements.length) {
+      observer.current = new IntersectionObserver((observedEntries) => {
+        setEntries(observedEntries);
+      }, options);
+
+      elements.forEach((element) => observer.current?.observe(element));
+    }
+
+    return () => {
+      if (observer.current) {
+        observer.current.disconnect();
+      }
+    };
+  }, [elements, options]);
+
+  return [setElements, entries] as const;
+}
 
 export default function Portfolio() {
   const [theme, setTheme] = useState<"purple" | "blue">("purple");
@@ -15,185 +40,219 @@ export default function Portfolio() {
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-fade-up");
+            entry.target.classList.remove("opacity-0");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll(".observe-me").forEach((el) => {
+      el.classList.add("opacity-0");
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div data-theme={theme} className="min-h-screen transition-colors duration-500 ease-in-out">
+    <div data-theme={theme} className="min-h-screen bg-black text-white transition-colors duration-500 ease-in-out font-sans overflow-x-hidden">
       
       {/* HEADER */}
-      <header className="relative w-full pt-12 pb-6 px-6 sm:px-12 flex flex-col sm:flex-row items-center justify-between z-10">
-        <div className="w-full text-center sm:absolute sm:inset-0 sm:pointer-events-none sm:flex sm:items-center sm:justify-center mt-4 sm:mt-0">
-          <h1 className="font-sans font-bold text-4xl sm:text-5xl md:text-6xl tracking-[0.2em] text-white text-shadow-glow-hover uppercase pointer-events-auto cursor-default">
-            Ankur Studio
-          </h1>
-        </div>
+      <header className="relative w-full pt-12 pb-6 px-6 sm:px-12 flex flex-col items-center justify-center z-10">
+        <div className="absolute inset-0 bg-noise z-0"></div>
         
-        <div className="hidden sm:block" /> {/* Spacer for flex layout */}
-        
-        <div className="flex items-center gap-4 mt-8 sm:mt-0 z-20">
+        <div className="w-full flex justify-end absolute top-6 right-6 sm:right-12 z-20 gap-3">
           <a
             href="#"
-            className="w-12 h-12 rounded-full glass-panel flex items-center justify-center neon-border text-white hover:scale-110 transition-transform"
-            aria-label="Instagram"
+            className="px-4 py-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 flex items-center gap-2 hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all"
           >
-            <Instagram size={20} />
+            <Instagram size={16} />
+            <span className="text-xs font-bold uppercase tracking-wider hidden sm:block">Instagram</span>
           </a>
           <a
             href="#"
-            className="w-12 h-12 rounded-full glass-panel flex items-center justify-center neon-border text-white hover:scale-110 transition-transform"
-            aria-label="Discord"
+            className="px-4 py-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 flex items-center gap-2 hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all"
           >
-            <Disc size={20} />
+            <Disc size={16} />
+            <span className="text-xs font-bold uppercase tracking-wider hidden sm:block">Discord</span>
           </a>
           <button
             onClick={toggleTheme}
-            className="w-12 h-12 rounded-full glass-panel flex items-center justify-center neon-border text-white hover:scale-110 transition-transform"
-            aria-label="Toggle Theme"
-            title="Toggle Theme"
+            className="px-4 py-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 flex items-center gap-2 hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all"
           >
-            <Palette size={20} />
+            <Palette size={16} />
           </button>
+        </div>
+
+        <div className="relative w-full text-center mt-12 sm:mt-4 pointer-events-none z-10 select-none">
+          {/* Shadowed outline version */}
+          <h1 className="font-display text-[15vw] leading-none text-stroke-outline opacity-30 absolute top-2 left-0 right-0">
+            ANKUR STUDIO
+          </h1>
+          {/* Main solid version */}
+          <h1 className="font-display text-[15vw] leading-none text-white relative">
+            ANKUR STUDIO
+          </h1>
         </div>
       </header>
 
       {/* CRIME SCENE TAPE */}
-      <div className="relative mt-12 mb-24 w-[110vw] -ml-[5vw] overflow-hidden -rotate-2 h-[60px] crime-scene-tape shadow-2xl z-0">
-        <div className="absolute inset-0 bg-[#ffd000]/90 mix-blend-overlay"></div>
-        <div className="absolute inset-0 flex items-center whitespace-nowrap animate-scroll w-[200%]">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <span key={i} className="text-black font-sans font-black text-2xl tracking-widest px-4 shrink-0">
-              DESIGNS BY ANKUR &bull; DESIGNS BY ANKUR &bull; DESIGNS BY ANKUR &bull; DESIGNS BY ANKUR &bull;
+      <div className="relative mt-8 mb-24 w-[110vw] -ml-[5vw] overflow-hidden -rotate-[3deg] h-[80px] bg-[#ffd000] shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-20">
+        <div className="absolute inset-0 bg-[repeating-linear-gradient(-45deg,transparent,transparent_20px,rgba(0,0,0,0.9)_20px,rgba(0,0,0,0.9)_40px)]"></div>
+        <div className="absolute inset-0 flex items-center whitespace-nowrap animate-tape-scroll w-[200%]">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <span key={i} className="text-black bg-[#ffd000] font-sans font-black text-3xl tracking-[0.3em] px-4 shrink-0 shadow-sm mix-blend-screen">
+              DESIGNS BY ANKUR &bull; DESIGNS BY ANKUR &bull;
             </span>
           ))}
         </div>
       </div>
 
-      {/* MAIN CONTENT CONTAINER */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* HERO SECTION */}
+      <section className="max-w-[1600px] mx-auto px-6 sm:px-12 mb-32 relative observe-me">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--accent)_0%,transparent_50%)] opacity-[0.07] pointer-events-none z-0"></div>
         
-        {/* HERO ID CARD */}
-        <section className="flex justify-center mb-16 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-          <div className="w-full max-w-[900px] glass-panel neon-border rounded-2xl p-8 sm:p-12 flex flex-col md:flex-row items-center gap-12 group">
-            
-            {/* Left: Typography stack */}
-            <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
-              <div className="font-display text-[4rem] sm:text-[5rem] lg:text-[6rem] leading-[0.85] text-white opacity-90 drop-shadow-md flex flex-col">
-                <span className="hover:text-[var(--accent-color)] transition-colors duration-300">LOVE</span>
-                <span className="hover:text-[var(--accent-color)] transition-colors duration-300">CREATING</span>
-                <span className="hover:text-[var(--accent-color)] transition-colors duration-300">LEARNING</span>
-                <span className="hover:text-[var(--accent-color)] transition-colors duration-300">BUILDING</span>
-                <span className="hover:text-[var(--accent-color)] transition-colors duration-300 text-[var(--accent-color)]">MAKING</span>
-              </div>
-            </div>
+        <div className="flex flex-col lg:flex-row items-center gap-16 relative z-10">
+          <div className="w-full lg:w-[60%] flex flex-col items-start font-display text-[clamp(4rem,10vw,10rem)] leading-[0.85] uppercase tracking-wide">
+            <span className="text-white">LOVE</span>
+            <span className="text-[var(--accent)] drop-shadow-[0_0_20px_var(--accent)]">CREATING</span>
+            <span className="text-white">LEARNING</span>
+            <span className="text-[var(--accent)] drop-shadow-[0_0_20px_var(--accent)]">BUILDING</span>
+            <span className="text-white">MAKING</span>
+          </div>
 
-            {/* Right: ID Photo */}
-            <div className="shrink-0 relative">
-              <div className="w-[250px] h-[250px] sm:w-[300px] sm:h-[300px] rounded-xl overflow-hidden neon-border group-hover:scale-105 transition-transform duration-500 bg-[#1a1a1a] relative">
-                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-[var(--accent-color)]/10 to-transparent opacity-50 z-10 mix-blend-screen pointer-events-none"></div>
+          <div className="w-full lg:w-[40%] flex flex-col items-center lg:items-end">
+            <div className="relative w-full max-w-[500px] aspect-[3/4] p-[2px] overflow-hidden group">
+              {/* Glitchy border effect container */}
+              <div className="absolute inset-0 border-2 border-dashed border-[var(--accent)] opacity-50"></div>
+              <div className="absolute inset-0 border-2 border-dashed border-white opacity-20 [animation:glow-pulse_2s_infinite]"></div>
+              
+              <div className="w-full h-full relative bg-[#050505] overflow-hidden z-10">
+                <div className="absolute inset-0 bg-gradient-to-tr from-[var(--accent)]/20 to-transparent mix-blend-screen z-20"></div>
                 <img 
                   src={`${import.meta.env.BASE_URL}images/hero-photo.png`} 
-                  alt="Ankur Studio Profile" 
-                  className="w-full h-full object-cover grayscale-[20%] contrast-125"
+                  alt="Creative Director" 
+                  className="w-full h-full object-cover grayscale-[30%] contrast-125 hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute bottom-4 left-0 w-full text-center z-20">
-                  <span className="bg-black/80 backdrop-blur-sm text-white/70 font-sans text-xs tracking-widest px-3 py-1 rounded-full border border-white/10 uppercase">
-                    [ ID: ANKUR-X99 ]
-                  </span>
-                </div>
               </div>
             </div>
+            <p className="mt-6 font-sans font-bold text-sm tracking-[0.4em] text-white/60 uppercase">
+              Creative Director @ Ankur Studio
+            </p>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* NAVIGATION BUTTONS */}
-        <section className="flex flex-col sm:flex-row justify-center gap-6 mb-32 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-          <button 
-            onClick={() => scrollToSection('gallery')}
-            className="bg-[#111] px-12 py-5 rounded-xl neon-border-intense font-sans font-bold text-xl tracking-wider text-white hover:scale-105 transition-all duration-300 flex-1 sm:flex-none max-w-xs"
-          >
-            DESIGNS
-          </button>
-          <button 
-            onClick={() => scrollToSection('building')}
-            className="bg-[#111] px-12 py-5 rounded-xl neon-border-intense font-sans font-bold text-xl tracking-wider text-white hover:scale-105 transition-all duration-300 flex-1 sm:flex-none max-w-xs"
-          >
-            BUILDING
-          </button>
-        </section>
+      {/* NAV BUTTONS */}
+      <section className="max-w-7xl mx-auto px-6 mb-40 flex flex-col sm:flex-row justify-center gap-6 observe-me">
+        <button 
+          onClick={() => scrollToSection('gallery')}
+          className="h-[72px] flex-1 sm:max-w-md bg-[var(--accent)] text-black font-sans font-bold text-2xl tracking-widest hover:brightness-110 transition-all shadow-[0_0_30px_var(--accent)] flex items-center justify-center"
+        >
+          DESIGNS &rarr;
+        </button>
+        <button 
+          onClick={() => scrollToSection('building')}
+          className="h-[72px] flex-1 sm:max-w-md bg-transparent border-2 border-[var(--accent)] text-white font-sans font-bold text-2xl tracking-widest hover:bg-[var(--accent)]/10 transition-all shadow-[inset_0_0_20px_rgba(var(--accent-rgb),0.2),0_0_20px_rgba(var(--accent-rgb),0.2)] flex items-center justify-center"
+        >
+          BUILDING &rarr;
+        </button>
+      </section>
 
-        {/* GALLERY SECTION */}
-        <section id="gallery" className="mb-32 scroll-mt-32">
-          <div className="text-center mb-16">
-            <h2 className="font-display text-5xl sm:text-7xl text-[var(--accent-color)] tracking-wider text-shadow-glow">GALLERY</h2>
-            <div className="h-1 w-24 mx-auto mt-6 bg-[var(--accent-color)] rounded-full shadow-[var(--accent-glow)]"></div>
+      {/* GALLERY SECTION */}
+      <section id="gallery" className="max-w-[1600px] mx-auto px-6 mb-40 scroll-mt-32">
+        <div className="mb-16 observe-me">
+          <div className="flex flex-wrap items-end gap-6 mb-6">
+            <h2 className="font-display text-5xl sm:text-7xl md:text-8xl text-stroke-outline">POSTER</h2>
+            <h2 className="font-display text-5xl sm:text-7xl md:text-8xl text-white">ARCHIVE</h2>
           </div>
+          <div className="h-[1px] w-full bg-gradient-to-r from-[var(--accent)] via-[var(--accent)] to-transparent shadow-[0_0_10px_var(--accent)]"></div>
+        </div>
 
-          {/* Masonry Grid */}
-          <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-4 space-y-4">
-            {galleryItems.map((item, index) => (
+        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
+          {galleryItems.map((item, index) => (
+            <div 
+              key={item.id} 
+              className="break-inside-avoid bg-[#000] border border-[var(--accent)] rounded-lg overflow-hidden group cursor-pointer observe-me relative"
+              style={{ animationDelay: `${(index % 10) * 0.1}s` }}
+            >
               <div 
-                key={item.id} 
-                className="break-inside-avoid glass-panel rounded-xl overflow-hidden neon-border group cursor-pointer animate-fade-in"
-                style={{ animationDelay: `${(index % 10) * 0.05}s` }}
+                className="w-full relative bg-[#0a0a0a] overflow-hidden transition-all duration-300 group-hover:shadow-[0_0_20px_var(--accent)]"
+                style={{ aspectRatio: `${item.width} / ${item.height}` }}
               >
-                {/* Image Placeholder maintaining exact aspect ratio */}
-                <div 
-                  className="w-full relative bg-[#151515] overflow-hidden"
-                  style={{ aspectRatio: `${item.width} / ${item.height}` }}
-                >
-                  {/* Subtle shimmer effect background */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] via-[#222] to-[#1a1a1a]"></div>
-                  
-                  {/* Neon overlay on hover */}
-                  <div className="absolute inset-0 bg-[var(--accent-color)]/0 group-hover:bg-[var(--accent-color)]/20 transition-colors duration-500 mix-blend-overlay"></div>
-                  
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 backdrop-blur-sm bg-black/40">
-                    <span className="font-sans font-bold tracking-widest text-[var(--accent-color)] text-sm uppercase">VIEW POSTER</span>
-                  </div>
-                </div>
-                
-                {/* Card Footer */}
-                <div className="p-4 border-t border-white/5 relative z-20 bg-[#0a0a0a]">
-                  <h3 className="font-sans font-bold text-white uppercase tracking-wider text-sm truncate">
-                    {item.name}
-                  </h3>
-                  <p className="font-sans text-muted-foreground text-xs mt-1">
-                    {item.width} &times; {item.height} px
-                  </p>
+                {/* Scanline animation on hover */}
+                <div className="absolute left-0 right-0 h-[2px] bg-[var(--accent)] shadow-[0_0_10px_var(--accent)] opacity-0 group-hover:opacity-100 group-hover:animate-scanline z-20"></div>
+
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 z-10 text-[var(--accent)] opacity-60 group-hover:opacity-100 transition-opacity">
+                  <Diamond size={32} className="group-hover:scale-125 transition-transform duration-500" />
+                  <span className="font-sans font-bold text-xs tracking-widest uppercase text-center px-4">{item.name}</span>
                 </div>
               </div>
-            ))}
-          </div>
-        </section>
+              
+              <div className="p-4 bg-black flex justify-between items-center relative z-30">
+                <h3 className="font-sans font-bold text-white text-xs uppercase tracking-wider truncate mr-4">
+                  {item.name}
+                </h3>
+                <p className="font-sans text-white/40 text-[10px] tracking-widest whitespace-nowrap">
+                  {item.width}x{item.height}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
-        {/* BUILDING SECTION */}
-        <section id="building" className="mb-32 scroll-mt-32 py-24 glass-panel rounded-3xl neon-border relative overflow-hidden text-center px-6">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--accent-color)_0%,transparent_50%)] opacity-10 pointer-events-none"></div>
+      {/* BUILDING SECTION */}
+      <section id="building" className="max-w-[1600px] mx-auto px-6 mb-40 scroll-mt-32 observe-me">
+        <div className="w-full min-h-[60vh] border border-white/10 relative flex flex-col items-center justify-center p-12 overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--accent)_0%,transparent_30%)] opacity-5 pointer-events-none"></div>
           
-          <h2 className="font-display text-4xl sm:text-6xl text-[var(--accent-color)] tracking-wider mb-6 text-shadow-glow">BUILDING PROJECTS</h2>
-          <p className="font-sans text-muted-foreground text-lg sm:text-xl max-w-2xl mx-auto">
-            Apps, experiments, and digital tools created by Ankur will appear here soon.
-          </p>
-          
-          <div className="mt-12 inline-flex items-center justify-center w-24 h-24 rounded-full border border-white/10 animate-pulse bg-white/5">
-            <span className="text-white/30 font-sans tracking-widest text-xs">SOON</span>
+          <div className="text-center z-10 flex flex-col gap-4 mb-12">
+            <h2 className="font-display text-5xl sm:text-7xl md:text-9xl tracking-[0.3em] text-stroke-outline">
+              COMING
+            </h2>
+            <h2 className="font-display text-5xl sm:text-7xl md:text-9xl tracking-[0.3em] text-white ml-4">
+              SOON
+            </h2>
           </div>
-        </section>
-      </main>
+          
+          <p className="font-sans text-white/50 tracking-widest text-sm uppercase max-w-md text-center mb-16 z-10">
+            Digital tools, experiments, and applications crafted with precision.
+          </p>
+
+          <div className="w-full max-w-lg h-[1px] bg-white/20 relative z-10">
+            <div className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[var(--accent)] shadow-[0_0_10px_var(--accent)] [animation:dot-move_3s_ease-in-out_infinite_alternate]"></div>
+          </div>
+        </div>
+      </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-white/10 bg-[#050505] py-12 relative z-10">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="text-center md:text-left">
-            <p className="font-sans font-bold text-white tracking-widest">&copy; 2026 ANKUR STUDIO</p>
-            <p className="font-sans text-muted-foreground text-sm mt-2">Designed and Built by Ankur</p>
+      <footer className="w-full border-t border-white/10 bg-black pt-8 pb-8 relative z-10 mt-auto">
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-[var(--accent)] opacity-50 shadow-[0_0_10px_var(--accent)]"></div>
+        <div className="max-w-[1600px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="font-display text-2xl text-white tracking-widest">
+            ANKUR STUDIO
           </div>
           
-          <div className="flex items-center gap-4">
-            <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-colors text-white/70">
-              <Instagram size={16} />
+          <div className="flex items-center gap-6">
+            <a href="#" className="text-white/50 hover:text-[var(--accent)] transition-colors">
+              <Instagram size={20} />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-colors text-white/70">
-              <Disc size={16} />
+            <a href="#" className="text-white/50 hover:text-[var(--accent)] transition-colors">
+              <Disc size={20} />
             </a>
+          </div>
+
+          <div className="font-sans text-white/30 text-xs tracking-widest uppercase">
+            &copy; 2026 Ankur Studio
           </div>
         </div>
       </footer>
