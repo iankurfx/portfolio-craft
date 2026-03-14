@@ -1,0 +1,108 @@
+After generating the website, also provide a clear **project folder structure and setup guide**.
+
+The project must follow this structure:
+
+ankur-studio-website
+│
+├── index.html
+├── styles.css
+├── script.js
+│
+├── assets
+│   ├── images
+│   │   ├── 500-days.jpg
+│   │   ├── comfort.jpg
+│   │   ├── did-it.jpg
+│   │   ├── fallen-star.jpg
+│   │   ├── hammer.jpg
+│   │   ├── indian.jpg
+│   │   ├── la-la-land-1.jpg
+│   │   ├── la-la-land-2.jpg
+│   │   ├── lifafa.jpg
+│   │   ├── lifafa-old-1.jpg ... lifafa-old-11.jpg
+│   │   ├── love-1.jpg ... love-4.jpg
+│   │   ├── nei.jpg
+│   │   ├── orchid-1.jpg ... orchid-10.jpg
+│   │   ├── orchid2-1.jpg ... orchid2-4.jpg
+│   │   ├── politics.jpg
+│   │   ├── rakhlo-1.jpg rakhlo-2.jpg
+│   │   ├── rose-1.jpg ... rose-13.jpg
+│   │   ├── spider.jpg
+│   │   ├── talwinder.jpg
+│   │   ├── tamasha.jpg
+│   │   ├── weeknd-new.jpg
+│   │   ├── weeknd-old-1.jpg ... weeknd-old-12.jpg
+│   │
+│   └── icons
+│       ├── instagram.svg
+│       ├── discord.svg
+│       └── theme.svg
+
+Explain clearly in comments inside the code where the user should paste images.
+
+Example inside HTML:
+
+<!-- Replace this image with your design -->
+
+<img src="assets/images/500-days.jpg">
+
+---
+
+SOCIAL LINKS
+
+Inside the header icons section include comments like:
+
+<!-- Paste your Instagram link here -->
+
+<a href="YOUR_INSTAGRAM_LINK">
+
+<!-- Paste your Discord server link here -->
+
+<a href="YOUR_DISCORD_LINK">
+
+---
+
+HOW TO ADD NEW DESIGNS
+
+Explain that the user can add new designs by:
+
+1. Placing the image inside:
+
+assets/images/
+
+2. Adding a new card inside the gallery section in index.html.
+
+---
+
+HOW TO RUN THE WEBSITE LOCALLY
+
+Explain these steps clearly:
+
+Method 1 (simplest)
+
+1. Download the project folder.
+2. Open the folder.
+3. Double click **index.html**.
+4. The website will open in the browser.
+
+Method 2 (recommended for development)
+
+Using VS Code Live Server:
+
+1. Open the project folder in VS Code.
+2. Install the **Live Server extension**.
+3. Right click **index.html**.
+4. Click **Open with Live Server**.
+
+The website will open at:
+
+http://127.0.0.1:5500
+
+---
+
+Also include comments in the code so the user easily understands:
+
+where to add images
+where to change text
+where to paste social links
+where to change colors

@@ -315,8 +315,42 @@ export default function Portfolio() {
                   (e.currentTarget as HTMLElement).style.boxShadow = "none";
                 }}
               >
-                {/* placeholder fill */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-100 group-hover:opacity-0 transition-opacity duration-200">
+                {/*
+                  ── POSTER IMAGE ─────────────────────────────────
+                  Drop your image into:
+                    artifacts/ankur-studio/public/images/
+
+                  File name must match the `imagePath` in data.ts.
+                  Examples:
+                    500-days.jpg
+                    orchid-3.jpg
+                    weeknd-old-7.jpg
+
+                  No code change needed — just add the file and reload.
+                  ──────────────────────────────────────────────── */}
+                <img
+                  src={item.imagePath}
+                  alt={item.name}
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).style.display = "none";
+                  }}
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                    transition: "transform 0.4s ease",
+                  }}
+                  className="group-hover:scale-105"
+                />
+
+                {/* placeholder — shown when no image file exists yet */}
+                <div
+                  className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                  style={{ zIndex: 0 }}
+                >
                   <div
                     style={{
                       width: 1,
@@ -327,11 +361,14 @@ export default function Portfolio() {
                   />
                 </div>
 
-                {/* hover overlay */}
-                <div className="absolute inset-0 flex flex-col items-end justify-end p-2.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                {/* hover overlay — title + dimensions */}
+                <div
+                  className="absolute inset-0 flex flex-col items-end justify-end p-2.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                  style={{ zIndex: 2 }}
+                >
                   <div
                     style={{
-                      background: "rgba(0,0,0,0.7)",
+                      background: "rgba(0,0,0,0.72)",
                       backdropFilter: "blur(6px)",
                       borderRadius: "3px",
                       padding: "4px 8px",
