@@ -1,0 +1,14 @@
+packages:
+  "lucide-react": "For icons"
+  "clsx": "For conditional class names"
+  "tailwind-merge": "For merging tailwind classes safely"
+
+images:
+  - path: "artifacts/ankur-studio/public/images/hero-photo.png"
+    description: "A dark futuristic cyber-punk styled portrait silhouette or abstract cool geometric shape to act as an anonymous profile photo for an ID card, glowing neon edges, dark background, premium minimal"
+    aspect_ratio: "1:1"
+
+notes:
+  - Purely frontend portfolio site, no API dependencies.
+  - Using CSS columns for Pinterest style masonry layout.
+  - Theme toggle uses a data-theme attribute wrapper.

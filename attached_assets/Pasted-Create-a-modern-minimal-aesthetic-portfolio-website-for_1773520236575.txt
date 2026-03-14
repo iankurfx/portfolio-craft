@@ -1,0 +1,344 @@
+Create a **modern, minimal, aesthetic portfolio website** for a creative designer called **ANKUR STUDIO**.
+
+The website will showcase poster designs and creative visuals.
+The design style should feel **dark, modern, slightly futuristic, and professional**, similar to high-end designer portfolios.
+
+Use **HTML, CSS, and JavaScript** only.
+
+---
+
+GLOBAL DESIGN STYLE
+
+The entire website must follow this design system:
+
+Background:
+Black (#000000)
+
+Primary Accent Color:
+Neon Purple (#a855f7 or similar glowing purple)
+
+Typography:
+Primary font: Poppins (Bold and Regular)
+Display font: Luckiest Guy (for graphical text)
+
+Visual Style:
+
+* Dark creative studio vibe
+* Neon purple glow accents
+* Smooth animations
+* Rounded corners
+* Glassy or soft shadow cards
+* Subtle grain or glow effects
+* Minimal but stylish layout
+
+Everything should feel **clean, premium, and creative**.
+
+---
+
+TOP HEADER SECTION
+
+At the very top center display the brand name:
+
+ANKUR STUDIO
+
+Requirements:
+
+* Font: Poppins Bold
+* Uppercase
+* Large size
+* White text
+* Slight letter spacing
+* Subtle neon purple glow on hover
+* Smooth animation when hovered
+
+---
+
+TOP RIGHT SOCIAL ICONS
+
+On the **top right side of the page** add three circular icon buttons.
+
+Icons:
+
+1. Instagram
+2. Discord
+3. Theme Toggle Button
+
+Style:
+
+* Icons should be white
+* Circular glass style container
+* Neon purple border glow on hover
+* Smooth hover animation
+
+Theme Button Behavior:
+
+Default theme:
+Neon Purple Glow
+
+When theme button is clicked:
+Switch glow color to **Electric Blue**
+
+This means all hover glows, borders and accents change from:
+
+Purple → Blue
+
+Background stays black.
+
+---
+
+CRIME SCENE TAPE ANIMATION
+
+Below the header create a **scrolling tape animation** similar to **crime scene caution tape**.
+
+Design Requirements:
+
+* Background color: Yellow (#ffd000)
+* Black diagonal stripes pattern
+* Black bold text repeating across the tape
+
+Text written on the tape:
+
+DESIGNS BY ANKUR • DESIGNS BY ANKUR • DESIGNS BY ANKUR
+
+Animation:
+
+The tape must **continuously scroll horizontally from left to right**.
+
+Style:
+
+* Slightly tilted like caution tape
+* Smooth infinite scrolling animation
+* Bold typography
+* Adds energy and personality to the site
+
+---
+
+MAIN HERO CARD (ID CARD STYLE)
+
+Below the tape create a **large centered ID card style container**.
+
+Card styling:
+
+* Dark grey/black card
+* Neon purple border glow
+* Rounded corners
+* Soft shadow
+* Glass style surface
+* Smooth hover glow animation
+* Looks like a futuristic ID badge
+
+Inside the card create **two main sections**.
+
+---
+
+LEFT SIDE TEXT
+
+Use **Luckiest Guy font**.
+
+Display these words vertically stacked:
+
+LOVE
+CREATING
+LEARNING
+BUILDING
+MAKING
+
+Style:
+
+* Large bold letters
+* White color
+* Slight shadow
+* Graphic style typography
+* Looks similar to the reference image layout
+
+Spacing between words should be balanced.
+
+---
+
+RIGHT SIDE IMAGE CONTAINER
+
+On the right side place a **square image container**.
+
+Requirements:
+
+* Rounded corners
+* Neon purple glowing border
+* Dummy placeholder image
+* Image fills container
+* Slight zoom on hover
+
+This will later hold the creator's photo or artwork.
+
+---
+
+BUTTONS UNDER THE HERO CARD
+
+Below the ID card place **two large aesthetic buttons** centered horizontally.
+
+Button 1:
+DESIGNS
+
+Button 2:
+BUILDING
+
+Button Style:
+
+* Dark card background
+* Neon purple glowing border
+* Rounded corners
+* Soft glow on hover
+* Slight scale animation when hovered
+* Clean minimal typography
+
+Button Behavior:
+
+DESIGNS button:
+Smooth scrolls the page to the **Design Gallery Section**
+
+BUILDING button:
+Scrolls to a **future projects section placeholder**
+
+---
+
+DESIGN GALLERY SECTION
+
+Create a **Pinterest-style masonry grid layout** for displaying poster designs.
+
+The layout must:
+
+* Automatically arrange cards vertically
+* Support different poster sizes
+* Be responsive
+* Adjust number of columns based on screen width
+
+Card Style:
+
+* Dark background card
+* Neon purple border glow
+* Rounded corners
+* Smooth hover animation
+* Slight zoom effect
+* Glow becomes stronger when hovered
+
+Each card must contain a **placeholder box** for now.
+
+Inside each placeholder display:
+
+Design Name
+Image Size
+
+---
+
+POSTER PLACEHOLDER DATA
+
+Generate placeholder cards based on the following data:
+
+500 days — 1842 x 2304 PX (1 box)
+
+comfort — 1080 x 1350 PX (1 box)
+
+did it — 808 x 1024 PX (1 box)
+
+fallen star — 981 x 1266 PX (1 box)
+
+hammer — 1285 x 644 PX (1 box)
+
+Indian — 981 x 1472 PX (1 box)
+
+la la land — 980 x 1228 PX (2 boxes)
+
+lifafa — 1280 x 1600 PX (1 box)
+
+lifafa poster old — 982 x 1226 PX (11 boxes)
+
+love — 820 x 1024 PX (4 boxes)
+
+nei — 1024 x 1536 PX (1 box)
+
+orchid — 1080 x 1350 PX (10 boxes)
+
+orchid 2 — 1288 x 1536 PX (4 boxes)
+
+politics — 981 x 1226 PX (1 box)
+
+rakhlo — 2480 x 3506 PX (2 boxes)
+
+rose — 818 x 1024 PX (13 boxes)
+
+spider — 736 x 1408 PX (1 box)
+
+talwinder — 1024 x 1024 PX (1 box)
+
+tamasha — 820 x 1024 PX (1 box)
+
+weeknd new — 1024 x 716 PX (1 box)
+
+weeknd old — 1024 x 1024 PX (12 boxes)
+
+Each card must clearly display:
+
+Design Name
+Resolution
+
+---
+
+BUILDING PROJECTS SECTION
+
+Below the gallery create a **simple section placeholder**.
+
+Title:
+
+BUILDING PROJECTS
+
+Subtitle:
+
+Apps, experiments and digital tools created by Ankur will appear here soon.
+
+Keep this section simple for now.
+
+---
+
+FOOTER SECTION
+
+Add a clean footer.
+
+Content:
+
+© 2026 Ankur Studio
+Designed and Built by Ankur
+
+Add small social icons again.
+
+---
+
+ANIMATIONS AND EFFECTS
+
+Add smooth modern animations including:
+
+Smooth scrolling
+Hover glow effects
+Card hover scaling
+Button hover scaling
+Scrolling tape animation
+Soft entrance animations when scrolling
+
+---
+
+RESPONSIVE DESIGN
+
+The website must adapt to screen sizes.
+
+Desktop:
+4–5 columns in gallery
+
+Tablet:
+3 columns
+
+Mobile:
+2 columns
+
+Hero card should stack vertically on mobile.
+
+---
+
+The final result should feel like a **professional creative designer portfolio website with neon purple accents, glowing UI elements, and a Pinterest-style gallery layout**.
