@@ -1,14 +1,22 @@
 import { useState, useEffect } from "react";
-import { Instagram, Disc3, SlidersHorizontal } from "lucide-react";
+import { Instagram, SlidersHorizontal } from "lucide-react";
+import { FaDiscord } from "react-icons/fa";
 import { getGalleryItems } from "@/lib/data";
 
+const THEMES = ["purple", "blue", "pink", "emerald"] as const;
+type Theme = typeof THEMES[number];
+
 export default function Portfolio() {
-  const [theme, setTheme] = useState<"purple" | "blue">("purple");
+  const [theme, setTheme] = useState<Theme>("purple");
   const [visible, setVisible] = useState<Set<string>>(new Set());
   const galleryItems = getGalleryItems();
 
-  const toggleTheme = () =>
-    setTheme((p) => (p === "purple" ? "blue" : "purple"));
+  const toggleTheme = () => {
+    setTheme((p) => {
+      const idx = THEMES.indexOf(p);
+      return THEMES[(idx + 1) % THEMES.length];
+    });
+  };
 
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -54,21 +62,32 @@ export default function Portfolio() {
         </span>
 
         <div className="flex items-center gap-2">
+          {/* PASTE YOUR INSTAGRAM LINK IN THE HREF BELOW */}
           <a
-            href="#"
+            href="https://www.instagram.com/iankur.fx?igsh=ajRneGptdWZnZWN5"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Instagram"
             className="w-9 h-9 rounded-full flex items-center justify-center border border-white/10 text-white/50 hover:border-[var(--ac)] hover:text-[var(--ac)] transition-all duration-200"
           >
             <Instagram size={15} />
           </a>
+
+          {/* PASTE YOUR DISCORD LINK IN THE HREF BELOW */}
           <a
-            href="#"
+            href="https://discord.com/users/1266802665783038104"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Discord"
             className="w-9 h-9 rounded-full flex items-center justify-center border border-white/10 text-white/50 hover:border-[var(--ac)] hover:text-[var(--ac)] transition-all duration-200"
           >
-            <Disc3 size={15} />
+            <FaDiscord size={16} />
           </a>
+
+          {/* Theme Toggler */}
           <button
             onClick={toggleTheme}
-            title="Toggle theme"
+            title="Change Theme Color"
             className="w-9 h-9 rounded-full flex items-center justify-center border border-white/10 text-white/50 hover:border-[var(--ac)] hover:text-[var(--ac)] transition-all duration-200"
           >
             <SlidersHorizontal size={15} />
@@ -163,7 +182,7 @@ export default function Portfolio() {
           >
             <span className="w-8 h-px bg-[var(--ac)]" />
             <span className="text-xs font-medium tracking-[0.25em] text-[var(--ac)] uppercase">
-              Creative Designer · Poster Artist
+              Creative Designs
             </span>
           </div>
 
@@ -182,7 +201,7 @@ export default function Portfolio() {
                         ? "translateY(0)"
                         : "translateY(32px)",
                       transition: `opacity 0.7s ease ${0.1 + i * 0.08}s, transform 0.7s ease ${0.1 + i * 0.08}s`,
-                      fontSize: "clamp(3.2rem, 8.5vw, 9rem)",
+                      fontSize: "clamp(2.9rem, 7.5vw, 8.3rem)",
                       lineHeight: 0.92,
                       fontWeight: 800,
                       letterSpacing: "-0.02em",
@@ -200,20 +219,20 @@ export default function Portfolio() {
             {/* profile image */}
             <div
               {...reveal("hero-img", 0.35)}
-              className="lg:w-[340px] xl:w-[400px] shrink-0"
+              className="lg:w-[480px] xl:w-[540px] shrink-0 mx-auto lg:mx-0 mt-8 lg:mt-0 group cursor-default"
             >
               <div
-                className="relative w-full overflow-hidden"
+                className="relative w-full overflow-hidden rounded-md transition-all duration-500"
                 style={{
-                  aspectRatio: "3/4",
+                  aspectRatio: "1/1",
                   border: "1px solid rgba(var(--ac-rgb), 0.35)",
                   boxShadow: "var(--ac-glow)",
                 }}
               >
                 <img
-                  src={`${import.meta.env.BASE_URL}images/hero-photo.png`}
+                  src={`${import.meta.env.BASE_URL}images/profile-square.jpg`}
                   alt="Ankur"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] will-change-transform"
                   style={{ filter: "contrast(1.1) brightness(0.9)" }}
                 />
                 <div
@@ -223,14 +242,6 @@ export default function Portfolio() {
                       "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 40%)",
                   }}
                 />
-                <div className="absolute bottom-4 left-4">
-                  <p className="text-[10px] font-medium tracking-[0.22em] text-white/50 uppercase">
-                    Creative Director
-                  </p>
-                  <p className="text-xs font-semibold tracking-[0.15em] text-white uppercase mt-0.5">
-                    Ankur Studio
-                  </p>
-                </div>
               </div>
             </div>
           </div>
@@ -238,7 +249,7 @@ export default function Portfolio() {
           {/* divider + CTA */}
           <div
             {...reveal("hero-cta", 0.55)}
-            className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 mt-16"
+            className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 mt-16 pb-12"
           >
             <button
               onClick={() => scrollTo("gallery")}
@@ -253,6 +264,76 @@ export default function Portfolio() {
             >
               Building Projects
             </button>
+          </div>
+        </div>
+
+        {/* ── CTA TAPE (Straight & Fancy) ───────────────────────── */}
+        <div
+          {...reveal("tape-cta", 0.75)}
+          style={{
+            position: "absolute",
+            bottom: "0",
+            left: "0",
+            width: "100vw",
+            zIndex: 10,
+          }}
+        >
+          <div
+            style={{
+              height: "46px",
+              background: "#ffd000",
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            {/* Stripe layer (behind text) */}
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                backgroundImage:
+                  "repeating-linear-gradient(-55deg, transparent, transparent 24px, rgba(0,0,0,0.15) 24px, rgba(0,0,0,0.15) 40px)",
+                zIndex: 1,
+              }}
+            />
+            {/* Text layer (above stripes) */}
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                display: "flex",
+                alignItems: "center",
+                zIndex: 2,
+                overflow: "hidden",
+              }}
+            >
+              <div
+                className="animate-tape"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  whiteSpace: "nowrap",
+                  width: "200%",
+                }}
+              >
+                {[0, 1].map((n) => (
+                  <span
+                    key={n}
+                    style={{
+                      fontFamily: "'Poppins', sans-serif",
+                      fontWeight: 700,
+                      fontSize: "0.85rem",
+                      letterSpacing: "0.15em",
+                      color: "#000",
+                      whiteSpace: "nowrap",
+                      userSelect: "none",
+                    }}
+                  >
+                    {tape.repeat(20)}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -341,9 +422,8 @@ export default function Portfolio() {
                     height: "100%",
                     objectFit: "cover",
                     display: "block",
-                    transition: "transform 0.4s ease",
                   }}
-                  className="group-hover:scale-105"
+                  className="transition-transform duration-700 ease-out group-hover:scale-[1.03] will-change-transform"
                 />
 
                 {/* placeholder — shown when no image file exists yet */}
@@ -396,38 +476,143 @@ export default function Portfolio() {
       >
         <div
           {...reveal("build-head", 0)}
-          className="max-w-[1500px] mx-auto flex flex-col lg:flex-row items-start lg:items-end justify-between gap-10"
+          className="max-w-[1500px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center"
         >
-          <div>
+          {/* Left: Heading */}
+          <div className="lg:col-span-4">
             <p className="text-[11px] font-medium tracking-[0.25em] text-[var(--ac)] uppercase mb-4">
-              In Progress
+              Development
             </p>
-            <h2 className="text-5xl sm:text-7xl font-extrabold tracking-[-0.03em] text-white leading-none">
+            <h2 className="text-6xl sm:text-7xl lg:text-[5.5rem] font-extrabold tracking-[-0.03em] text-white leading-[0.95]">
               Building
               <br />
               <span className="white-text-stroke">Projects</span>
             </h2>
           </div>
 
-          <div className="lg:max-w-sm">
-            <p className="text-base text-white/40 leading-relaxed">
-              Apps, experiments and digital tools created by Ankur will appear
-              here soon.
-            </p>
-
-            {/* progress bar */}
-            <div className="mt-8 relative h-px bg-white/10 w-full overflow-hidden">
+          {/* Middle: Interlocking Gears Animation */}
+          <div className="lg:col-span-3 flex justify-center items-center lg:px-4 h-full min-h-[140px]">
+            <div
+              className="relative w-32 h-32 flex items-center justify-center origin-center"
+              style={{ transform: "scale(1.65)" }}
+            >
+              {/* Main large gear */}
               <div
-                className="dot-slide absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full"
+                className="absolute text-[var(--ac)] animate-[spin_8s_linear_infinite]"
                 style={{
-                  background: "var(--ac)",
-                  boxShadow: "var(--ac-glow)",
+                  filter: "drop-shadow(0 0 8px rgba(var(--ac-rgb), 0.6))",
+                  top: "12px",
+                  left: "16px"
                 }}
-              />
+              >
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </div>
+
+              {/* Secondary smaller gear */}
+              <div
+                className="absolute text-white animate-[spin_6s_linear_infinite_reverse]"
+                style={{
+                  opacity: 0.5,
+                  top: "66px",
+                  left: "64px"
+                }}
+              >
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </div>
+
+              {/* Tertiary tiny gear */}
+              <div
+                className="absolute text-[var(--ac)] animate-[spin_4s_linear_infinite]"
+                style={{
+                  filter: "drop-shadow(0 0 4px rgba(var(--ac-rgb), 0.4))",
+                  opacity: 0.8,
+                  top: "22px",
+                  left: "74px"
+                }}
+              >
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </div>
             </div>
-            <p className="text-[10px] tracking-[0.2em] text-white/20 uppercase mt-2">
-              Coming soon
-            </p>
+          </div>
+
+          {/* Right: Apps List */}
+          <div className="lg:col-span-5 w-full flex flex-col gap-4">
+
+            {/* App 1: Raksha Setu */}
+            <div className="group flex items-center gap-5 p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300 hover:border-[rgba(var(--ac-rgb),0.3)]">
+              {/* App Icon Box */}
+              <div
+                className="w-16 h-16 shrink-0 rounded-2xl overflow-hidden relative shadow-lg"
+                style={{
+                  border: "1px solid rgba(var(--ac-rgb), 0.4)",
+                  boxShadow: "0 0 35px 5px rgba(var(--ac-rgb), 0.55)",
+                }}
+              >
+                <img
+                  src={`${import.meta.env.BASE_URL}images/raksha-setu.png`}
+                  alt="Raksha Setu"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  onError={(e) => {
+                    // Fallback gradient if image not found
+                    (e.currentTarget as HTMLImageElement).style.display = 'none';
+                    e.currentTarget.parentElement!.style.background = "linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%)";
+                  }}
+                />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-xl font-bold text-white tracking-wide" style={{ fontFamily: "'Poppins', sans-serif" }}>Raksha Setu</h3>
+                <p className="text-sm text-white/40 mt-1 font-medium">Safety & Emergency App</p>
+              </div>
+              <button
+                onClick={() => alert("I will update this soon :)")}
+                className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/50 group-hover:text-[var(--ac)] group-hover:border-[var(--ac)] transition-colors cursor-pointer"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+            </div>
+
+            {/* App 2: Task Enforcer */}
+            <div className="group flex items-center gap-5 p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300 hover:border-[rgba(var(--ac-rgb),0.3)]">
+              {/* App Icon Box */}
+              <div
+                className="w-16 h-16 shrink-0 rounded-2xl overflow-hidden relative shadow-lg"
+                style={{
+                  border: "1px solid rgba(var(--ac-rgb), 0.4)",
+                  boxShadow: "0 0 35px 5px rgba(var(--ac-rgb), 0.55)",
+                }}
+              >
+                <img
+                  src={`${import.meta.env.BASE_URL}images/task-enforcer.png`}
+                  alt="Task Enforcer"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  onError={(e) => {
+                    // Fallback gradient if image not found
+                    (e.currentTarget as HTMLImageElement).style.display = 'none';
+                    e.currentTarget.parentElement!.style.background = "linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%)";
+                  }}
+                />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-xl font-bold text-white tracking-wide" style={{ fontFamily: "'Poppins', sans-serif" }}>Task Enforcer</h3>
+                <p className="text-sm text-white/40 mt-1 font-medium">Productivity & Alarms</p>
+              </div>
+              <button
+                onClick={() => alert("I will update this soon :)")}
+                className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/50 group-hover:text-[var(--ac)] group-hover:border-[var(--ac)] transition-colors cursor-pointer"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+            </div>
+
           </div>
         </div>
       </section>
@@ -441,21 +626,6 @@ export default function Portfolio() {
           <p className="text-xs font-semibold tracking-[0.18em] uppercase text-white/40">
             Ankur Studio
           </p>
-
-          <div className="flex items-center gap-3">
-            <a
-              href="#"
-              className="w-8 h-8 rounded-full flex items-center justify-center border border-white/10 text-white/30 hover:border-[var(--ac)] hover:text-[var(--ac)] transition-all duration-200"
-            >
-              <Instagram size={13} />
-            </a>
-            <a
-              href="#"
-              className="w-8 h-8 rounded-full flex items-center justify-center border border-white/10 text-white/30 hover:border-[var(--ac)] hover:text-[var(--ac)] transition-all duration-200"
-            >
-              <Disc3 size={13} />
-            </a>
-          </div>
 
           <p className="text-[11px] text-white/25 tracking-wider">
             © 2026 Ankur Studio · Designed &amp; Built by Ankur
