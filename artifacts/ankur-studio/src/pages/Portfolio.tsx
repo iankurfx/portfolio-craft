@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "wouter";
 import { Instagram, SlidersHorizontal } from "lucide-react";
 import { FaDiscord } from "react-icons/fa";
 import { getGalleryItems } from "@/lib/data";
@@ -7,6 +8,7 @@ const THEMES = ["purple", "blue", "pink", "emerald"] as const;
 type Theme = typeof THEMES[number];
 
 export default function Portfolio() {
+  const [, setLocation] = useLocation();
   const [theme, setTheme] = useState<Theme>("purple");
   const [visible, setVisible] = useState<Set<string>>(new Set());
   const galleryItems = getGalleryItems();
@@ -573,7 +575,7 @@ export default function Portfolio() {
                 <p className="text-sm text-white/40 mt-1 font-medium">Safety & Emergency App</p>
               </div>
               <button
-                onClick={() => alert("I will update this soon :)")}
+                onClick={() => setLocation("/raksha-setu")}
                 className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/50 group-hover:text-[var(--ac)] group-hover:border-[var(--ac)] transition-colors cursor-pointer"
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
