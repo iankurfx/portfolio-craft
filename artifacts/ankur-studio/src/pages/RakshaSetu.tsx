@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useLocation } from "wouter";
 import img1 from "@assets/1_1776541800724.jpg";
 import img2 from "@assets/2_1776541805347.jpg";
 import img3 from "@assets/3_1776541809962.jpg";
@@ -168,10 +169,359 @@ function BtnOutline({
   );
 }
 
+/* ─── SECTION HERO ───────────────────────────────────────────────────────── */
+function SectionHero() {
+  const [, setLocation] = useLocation();
+  return (
+    <section
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "linear-gradient(135deg, #130409 0%, #0e0308 60%, #090509 100%)",
+        padding: "80px 24px 40px 24px",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* Ambient background glows */}
+      <div style={{
+        position: "absolute",
+        top: "20%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        width: "min(600px, 90vw)",
+        height: "min(600px, 90vw)",
+        background: "radial-gradient(circle, rgba(239,68,68,0.06) 0%, transparent 70%)",
+        pointerEvents: "none",
+        zIndex: 1,
+      }} />
+      <div style={{
+        position: "absolute",
+        bottom: "10%",
+        right: "10%",
+        width: 300,
+        height: 300,
+        background: "radial-gradient(circle, rgba(168,85,247,0.04) 0%, transparent 70%)",
+        pointerEvents: "none",
+        zIndex: 1,
+      }} />
+
+      <div style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 28,
+        maxWidth: 900,
+        width: "100%",
+        textAlign: "center",
+        position: "relative",
+        zIndex: 2,
+      }}>
+        {/* Subtle, beautiful badge */}
+        <div style={{
+          background: "rgba(239, 68, 68, 0.08)",
+          border: "1px solid rgba(239, 68, 68, 0.2)",
+          padding: "6px 16px",
+          borderRadius: 20,
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 8,
+          marginBottom: 8,
+        }}>
+          <span style={{
+            width: 6,
+            height: 6,
+            borderRadius: "50%",
+            background: "#ef4444",
+            display: "inline-block",
+            animation: "pulse 2s infinite",
+          }} />
+          <span style={{
+            fontSize: 11,
+            fontWeight: 800,
+            textTransform: "uppercase",
+            letterSpacing: "0.2em",
+            color: "#f87171",
+          }}>
+            Raksha Setu Gateway
+          </span>
+        </div>
+
+        {/* Catchy headline */}
+        <h1 style={{
+          fontSize: "clamp(2.2rem, 5.5vw, 4.2rem)",
+          fontWeight: 800,
+          color: "#fff",
+          lineHeight: 1.1,
+          letterSpacing: "-0.03em",
+          margin: 0,
+          maxWidth: 700,
+          fontFamily: "'Poppins', sans-serif"
+        }}>
+          Secure Gateway to{" "}
+          <span style={{
+            background: "linear-gradient(90deg, #ef4444, #a855f7)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}>
+            Personal Safety
+          </span>
+        </h1>
+
+        <p style={{
+          fontSize: "clamp(14px, 1.8vw, 16px)",
+          color: "#8899aa",
+          lineHeight: 1.7,
+          maxWidth: 550,
+          margin: "0 0 16px 0",
+          fontFamily: "'Poppins', sans-serif"
+        }}>
+          Choose a path below to discover our system architecture, or explore the live safety functions designed to protect you instantly.
+        </p>
+
+        {/* Responsive gateway grid */}
+        <div className="gateway-grid" style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 24,
+          width: "100%",
+          maxWidth: 780,
+          marginTop: 12,
+        }}>
+          
+          {/* Tile 1: Architecture */}
+          <button
+            onClick={() => {
+              setLocation("/raksha-setu/architecture");
+              window.scrollTo(0, 0);
+            }}
+            className="gateway-card arch-card"
+            style={{
+              background: "rgba(255, 255, 255, 0.015)",
+              border: "1px solid rgba(255, 255, 255, 0.04)",
+              borderRadius: 24,
+              padding: "40px 32px",
+              cursor: "pointer",
+              textAlign: "left",
+              display: "flex",
+              flexDirection: "column",
+              gap: 20,
+              alignItems: "flex-start",
+              position: "relative",
+              overflow: "hidden",
+              fontFamily: "inherit"
+            }}
+          >
+            {/* Corner ambient glow */}
+            <div className="card-glow" style={{
+              position: "absolute",
+              top: "-50%",
+              right: "-50%",
+              width: "100%",
+              height: "100%",
+              background: "radial-gradient(circle, rgba(168,85,247,0.12) 0%, transparent 60%)",
+              opacity: 0,
+              transition: "opacity 0.4s ease",
+              pointerEvents: "none",
+            }} />
+
+            {/* Glowing Icon Frame */}
+            <div className="icon-frame" style={{
+              width: 56,
+              height: 56,
+              borderRadius: 16,
+              background: "rgba(168, 85, 247, 0.06)",
+              border: "1px solid rgba(168, 85, 247, 0.15)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#c084fc",
+              transition: "all 0.4s ease",
+            }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                <line x1="9" y1="3" x2="9" y2="21" />
+                <line x1="15" y1="3" x2="15" y2="21" />
+                <line x1="3" y1="9" x2="21" y2="9" />
+                <line x1="3" y1="15" x2="21" y2="15" />
+              </svg>
+            </div>
+
+            <div style={{ zIndex: 2 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <h2 style={{
+                  fontSize: 22,
+                  fontWeight: 700,
+                  color: "#fff",
+                  margin: 0,
+                  fontFamily: "'Poppins', sans-serif"
+                }}>
+                  Architecture
+                </h2>
+                <span style={{
+                  fontSize: 9,
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.08em",
+                  color: "#c084fc",
+                  background: "rgba(168, 85, 247, 0.12)",
+                  padding: "3px 8px",
+                  borderRadius: 6,
+                }}>
+                  Offline
+                </span>
+              </div>
+              <p style={{
+                fontSize: 14,
+                color: "#7a8fa8",
+                lineHeight: 1.55,
+                margin: "10px 0 0 0",
+                fontFamily: "'Poppins', sans-serif"
+              }}>
+                Deep-dive analysis of hardware integration, secure backends, and low-latency safety servers.
+              </p>
+            </div>
+
+            {/* Micro action arrow indicator */}
+            <div className="action-link" style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+              fontSize: 13,
+              fontWeight: 600,
+              color: "#a855f7",
+              marginTop: "auto",
+              transition: "all 0.4s ease",
+            }}>
+              <span>View System Specs</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </div>
+          </button>
+
+          {/* Tile 2: Functions */}
+          <button
+            onClick={() => {
+              document.getElementById("functions-start")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="gateway-card func-card"
+            style={{
+              background: "rgba(239, 68, 68, 0.02)",
+              border: "1px solid rgba(239, 68, 68, 0.08)",
+              borderRadius: 24,
+              padding: "40px 32px",
+              cursor: "pointer",
+              textAlign: "left",
+              display: "flex",
+              flexDirection: "column",
+              gap: 20,
+              alignItems: "flex-start",
+              position: "relative",
+              overflow: "hidden",
+              fontFamily: "inherit"
+            }}
+          >
+            {/* Corner ambient glow */}
+            <div className="card-glow" style={{
+              position: "absolute",
+              top: "-50%",
+              right: "-50%",
+              width: "100%",
+              height: "100%",
+              background: "radial-gradient(circle, rgba(239,68,68,0.12) 0%, transparent 60%)",
+              opacity: 0,
+              transition: "opacity 0.4s ease",
+              pointerEvents: "none",
+            }} />
+
+            {/* Glowing Icon Frame */}
+            <div className="icon-frame" style={{
+              width: 56,
+              height: 56,
+              borderRadius: 16,
+              background: "rgba(239, 68, 68, 0.08)",
+              border: "1px solid rgba(239, 68, 68, 0.2)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#f87171",
+              transition: "all 0.4s ease",
+            }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg>
+            </div>
+
+            <div style={{ zIndex: 2 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <h2 style={{
+                  fontSize: 22,
+                  fontWeight: 700,
+                  color: "#fff",
+                  margin: 0,
+                  fontFamily: "'Poppins', sans-serif"
+                }}>
+                  Functions
+                </h2>
+                <span style={{
+                  fontSize: 9,
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.08em",
+                  color: "#ef4444",
+                  background: "rgba(239, 68, 68, 0.12)",
+                  padding: "3px 8px",
+                  borderRadius: 6,
+                }}>
+                  Live Demo
+                </span>
+              </div>
+              <p style={{
+                fontSize: 14,
+                color: "#fca5a5",
+                lineHeight: 1.55,
+                margin: "10px 0 0 0",
+                fontFamily: "'Poppins', sans-serif"
+              }}>
+                Interactive demo of instant Emergency SOS, voice triggers, safety networks, and protective features.
+              </p>
+            </div>
+
+            {/* Micro action arrow indicator */}
+            <div className="action-link" style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+              fontSize: 13,
+              fontWeight: 600,
+              color: "#f87171",
+              marginTop: "auto",
+              transition: "all 0.4s ease",
+            }}>
+              <span>Launch Live Features</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </div>
+          </button>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─── SECTION 1 ─────────────────────────────────────────────────────────── */
 function Section1() {
   return (
     <section
+      id="functions-start"
       style={{
         minHeight: "100vh",
         display: "grid",
@@ -939,6 +1289,11 @@ function Section4() {
 /* ─── ROOT ───────────────────────────────────────────────────────────────── */
 export default function Home() {
   useReveal();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
+
   return (
     <>
       <style>{`
@@ -946,6 +1301,60 @@ export default function Home() {
         html,body{font-family:'Poppins',sans-serif;background:#07080f;color:#fff;scroll-behavior:smooth;overflow-x:hidden;}
         .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
         .reveal.visible{opacity:1;transform:none;}
+        
+        @keyframes pulse {
+          0% { transform: scale(0.95); opacity: 0.7; }
+          50% { transform: scale(1.05); opacity: 1; }
+          100% { transform: scale(0.95); opacity: 0.7; }
+        }
+
+        .gateway-card {
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+        .gateway-card:hover {
+          transform: translateY(-6px) scale(1.02);
+        }
+        .arch-card:hover {
+          background: rgba(255, 255, 255, 0.035) !important;
+          border-color: rgba(168, 85, 247, 0.35) !important;
+          box-shadow: 0 20px 40px rgba(168, 85, 247, 0.12) !important;
+        }
+        .arch-card:hover .icon-frame {
+          background: rgba(168, 85, 247, 0.16) !important;
+          border-color: rgba(168, 85, 247, 0.3) !important;
+          color: #d8b4fe !important;
+        }
+        .arch-card:hover .card-glow {
+          opacity: 1 !important;
+        }
+        .arch-card:hover .action-link {
+          transform: translateX(4px);
+          color: #d8b4fe !important;
+        }
+        
+        .func-card:hover {
+          background: rgba(239, 68, 68, 0.04) !important;
+          border-color: rgba(239, 68, 68, 0.35) !important;
+          box-shadow: 0 20px 40px rgba(239, 68, 68, 0.15) !important;
+        }
+        .func-card:hover .icon-frame {
+          background: rgba(239, 68, 68, 0.15) !important;
+          border-color: rgba(239, 68, 68, 0.35) !important;
+          color: #fff !important;
+        }
+        .func-card:hover .card-glow {
+          opacity: 1 !important;
+        }
+        .func-card:hover .action-link {
+          transform: translateX(4px);
+          color: #fff !important;
+        }
+
+        @media(max-width:768px){
+          .gateway-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
         @media(max-width:860px){
           section{grid-template-columns:1fr!important;}
           section>div:first-child{min-height:50vh;}
@@ -954,6 +1363,7 @@ export default function Home() {
           .feat-grid{grid-template-columns:1fr!important;}
         }
       `}</style>
+      <SectionHero />
       <Section1 />
       <Section2 />
       <Section3 />

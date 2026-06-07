@@ -181,3 +181,84 @@ body {
     color: transparent;
   }
 }
+
+/* --- Tech Insights Hub Styles --- */
+:root {
+  --pink: #FF3D7F;
+  --purple: #9B59D4;
+  --pink-glow: rgba(255, 61, 127, 0.45);
+  --purple-glow: rgba(155, 89, 212, 0.45);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-pink {
+  background: rgba(255, 61, 127, 0.06);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 61, 127, 0.25);
+  box-shadow: 0 0 24px rgba(255, 61, 127, 0.12), inset 0 0 0 1px rgba(255, 61, 127, 0.08);
+}
+
+.glass-purple {
+  background: rgba(155, 89, 212, 0.06);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(155, 89, 212, 0.25);
+  box-shadow: 0 0 24px rgba(155, 89, 212, 0.12), inset 0 0 0 1px rgba(155, 89, 212, 0.08);
+}
+
+.neon-text {
+  color: var(--pink);
+  text-shadow: 0 0 16px rgba(255, 61, 127, 0.65);
+}
+
+.neon-text-purple {
+  color: var(--purple);
+  text-shadow: 0 0 16px rgba(155, 89, 212, 0.65);
+}
+
+.glow-pink {
+  box-shadow: 0 0 16px var(--pink-glow), 0 0 40px rgba(255, 61, 127, 0.15);
+}
+
+.glow-purple {
+  box-shadow: 0 0 16px var(--purple-glow), 0 0 40px rgba(155, 89, 212, 0.15);
+}
+
+.section-divider {
+  background: linear-gradient(90deg, transparent, rgba(255, 61, 127, 0.3), rgba(155, 89, 212, 0.3), transparent);
+  height: 1px;
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.terminal-window {
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.terminal-header {
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #080808; }
+::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--pink); }
+

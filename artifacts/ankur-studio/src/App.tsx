@@ -5,6 +5,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Portfolio from "@/pages/Portfolio";
 import RakshaSetu from "@/pages/RakshaSetu";
+import TechInsights from "@/pages/TechInsights";
+import MusicPlayer from "@/pages/MusicPlayer";
 
 const queryClient = new QueryClient();
 
@@ -12,7 +14,9 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Portfolio} />
+      <Route path="/raksha-setu/architecture" component={TechInsights} />
       <Route path="/raksha-setu" component={RakshaSetu} />
+      <Route path="/music-player" component={MusicPlayer} />
       <Route component={NotFound} />
     </Switch>
   );
