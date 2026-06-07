@@ -279,83 +279,6 @@ export default function Portfolio() {
                 {/* ── Everything floats together ── */}
                 <div className="w-full h-full flex flex-col items-center justify-center relative" style={{ animation: 'hover-bot 5s ease-in-out infinite' }}>
 
-                  {/* ── Speech Bubble (synced with robot float) ──
-                      TEMPORARILY HIDDEN PER REQUEST
-                  <div
-                    className="absolute z-30 pointer-events-none"
-                    style={{
-                      top: '-16px',
-                      right: '-36px',
-                    }}
-                  >
-                    <div
-                      className="absolute -inset-[1px] rounded-[23px] opacity-60"
-                      style={{
-                        background: 'linear-gradient(135deg, var(--ac), rgba(var(--ac-rgb), 0.1), var(--ac), rgba(var(--ac-rgb), 0.1))',
-                        backgroundSize: '300% 300%',
-                        animation: 'shimmer-border 4s ease infinite',
-                        filter: 'blur(1px)',
-                        transition: 'background 0.5s ease',
-                      }}
-                    />
-                    <div
-                      className="relative w-[220px] sm:w-[240px] px-5 py-3.5 rounded-[22px]"
-                      style={{
-                        background: 'rgba(8, 8, 12, 0.82)',
-                        backdropFilter: 'blur(24px) saturate(1.8)',
-                        WebkitBackdropFilter: 'blur(24px) saturate(1.8)',
-                        border: '1px solid rgba(var(--ac-rgb), 0.25)',
-                        boxShadow: '0 0 30px rgba(var(--ac-rgb), 0.12), 0 0 60px rgba(var(--ac-rgb), 0.06), 0 12px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06)',
-                        transition: 'border-color 0.5s ease, box-shadow 0.5s ease',
-                      }}
-                    >
-                      <div className="flex items-center gap-2 mb-2">
-                        <div
-                          className="w-[7px] h-[7px] rounded-full flex-shrink-0"
-                          style={{
-                            background: 'var(--ac)',
-                            animation: 'status-pulse 2.5s ease-in-out infinite',
-                            transition: 'background 0.5s ease',
-                          }}
-                        />
-                        <span
-                          className="text-[10px] font-semibold tracking-[0.2em] uppercase"
-                          style={{ color: 'var(--ac)', transition: 'color 0.5s ease' }}
-                        >
-                          Building
-                        </span>
-                      </div>
-
-                      <p
-                        className="text-[13px] sm:text-sm font-medium leading-relaxed text-white/85"
-                        style={{
-                          opacity: bubbleVisible ? 1 : 0,
-                          transform: bubbleVisible ? 'translateY(0)' : 'translateY(4px)',
-                          transition: 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-                          minHeight: '42px',
-                          display: 'flex',
-                          alignItems: 'center',
-                        }}
-                      >
-                        {BUBBLE_MESSAGES[bubbleIndex]}
-                      </p>
-                    </div>
-
-                    <div
-                      className="absolute"
-                      style={{
-                        bottom: '-8px',
-                        left: '28px',
-                        width: 0,
-                        height: 0,
-                        borderLeft: '10px solid transparent',
-                        borderRight: '10px solid transparent',
-                        borderTop: '10px solid rgba(8, 8, 12, 0.82)',
-                        filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.4))',
-                      }}
-                    />
-                  </div>
-                  */}
 
                   {/* ── Lottie Animation ── */}
                   {/* 
@@ -384,7 +307,7 @@ export default function Portfolio() {
               {...reveal("hero-content", 0.3)}
               className="flex-1 flex flex-col justify-start w-full lg:pt-0 lg:ml-12 xl:ml-24"
             >
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-[-0.03em] text-white leading-none mb-6" style={{ fontFamily: "'Avenir Next Cyr', sans-serif" }}>
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-[-0.03em] text-white leading-none mb-6" style={{ fontFamily: "'Poppins', sans-serif" }}>
                 Ankur <span className="text-[var(--ac)]">Studio</span>
               </h1>
 
